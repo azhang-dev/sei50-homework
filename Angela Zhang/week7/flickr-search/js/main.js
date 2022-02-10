@@ -96,18 +96,19 @@ const fetchPhotoById = function(id){
 };// fetchPhotoById()
 
 const renderPhotoDetails = function(data){
-    $('#imageResults').hide();
+    console.log($('#imagesResults'));
+    $('#imagesResults').hide();
     $('#imageDetails').show();
     
     console.log('Photo details: ', data);
     $ImageDetails = $('#imageDetails');
-
+    let sizeSuffix = 'q'
     $ImageDetails.html(`
     
     <h3>${data.title._content} </h3>
     <p><strong>Views:</strong>${data.views}</p>
     <p><strong>Date taken:</strong>${data.dates.taken}</p>
-    
+    <img src="https://live.staticflickr.com/${data.server}/${data.id}_${data.secret}_${sizeSuffix}.jpg">
     <p><strong>Description:</strong>${data.description._content}</p>
     <button id="backButton">Back to Results</button>
     
@@ -135,5 +136,10 @@ $(function(){
 
     }); // submit handler
 
+    $('#homePage').on('click', function(){
+        console.log('Homepage Clicked!');
+        $('#imageDetails').hide();
+        $('#imagesResults').hide();
+    })
 
 });// Dom ready Handler
